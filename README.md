@@ -7,7 +7,7 @@ Jaist App is built to improve the mobile experience of students who study in Jai
 ## Additional Plugin ##
 
 ### [react-native-vector-icons](https://github.com/oblador/react-native-vector-icons)
-### [react-native-config](https://github.com/luggit/react-native-config)
+### [react-native-elements](https://github.com/react-native-training/react-native-elementshttps://github.com/react-native-training/react-native-elements)
 ### [react-native-navigation](https://wix.github.io/react-native-navigation/#/)
 
 ## Issues Notes ##
