@@ -4,7 +4,7 @@
 // Welcome screen
 
 import React, { Component } from 'react';
-import { StyleSheet, View, Image, AsyncStorage } from 'react-native';
+import { Platform, StyleSheet, View, Image, AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
 import { Navigation } from 'react-native-navigation';
 
@@ -21,7 +21,9 @@ const tabsStyle = {
     navBarBackgroundColor: '#4AA1DE',
     navBarTextColor: '#FFFFFF',
     forceTitlesDisplay: true
-}
+};
+const station_ico = (Platform.OS === 'ios')? require('./resources/station.png') : require('./resources/station_android.png');
+const bus_ico = (Platform.OS === 'ios')? require('./resources/bus.png') : require('./resources/bus_android.png');
 
 class Welcome extends Component {
     static navigatorStyle = {
@@ -39,7 +41,7 @@ class Welcome extends Component {
         try {
             AsyncStorage.getItem('ishikawaline').then((value) => {
                 let json = JSON.parse(value);
-                console.log('[JaistMobile] componentWillMount', json);
+                console.log('[JaistApp] componentWillMount', json);
                 if (json != null) {
                     this.props.fetchIshikawaLine(json.Author, json.CreatedDate, json.Stations);
                 } else
@@ -47,7 +49,7 @@ class Welcome extends Component {
                 
                 AsyncStorage.getItem('shuttlebus').then((value) => {
                     let json = JSON.parse(value);
-                    console.log('[JaistMobile] componentWillMount', json);
+                    console.log('[JaistApp] componentWillMount', json);
                     if (json != null) {
                         this.props.fetchShuttleBus(json.Author, json.CreatedDate, json.Stations);
                         this._checkForUpdates(false);
@@ -56,7 +58,7 @@ class Welcome extends Component {
                 });
             });
         } catch (err) {
-            console.log('[JaistMobile] componentWillMount', err)
+            console.log('[JaistApp] componentWillMount', err)
             this._checkForUpdates(true);
         }
     }
@@ -71,10 +73,10 @@ class Welcome extends Component {
 
     _checkForUpdates(forceUpdate) {
         getIshikawaLineTimeTable().then((response) => {
-            console.log('[JaistMobile] _checkForUpdates', response);
+            console.log('[JaistApp] _checkForUpdates', response);
             if (response != undefined) {
                 if (forceUpdate) {
-                    console.log('[JaistMobile] Update New Ishikawa Lines TimeTable', response.Stations);
+                    console.log('[JaistApp] Update New Ishikawa Lines TimeTable', response.Stations);
                     this.props.fetchIshikawaLine(response.Author, response.CreatedDate, response.Stations);
                     saveIshikawaLine(response);
                 }
@@ -82,7 +84,7 @@ class Welcome extends Component {
                     var currentData = new Date(this.props.ishikawaline.createdDate);
                     var serverData = new Date(response.CreatedDate);
                     if (serverData > currentData) { // update timetable
-                        console.log('[JaistMobile] Update New Ishikawa Lines TimeTable', response.Stations);
+                        console.log('[JaistApp] Update New Ishikawa Lines TimeTable', response.Stations);
                         this.props.fetchIshikawaLine(response.Author, response.CreatedDate, response.Stations);
                         saveIshikawaLine(response);
                     }
@@ -101,7 +103,7 @@ class Welcome extends Component {
                         var currentData = new Date(this.props.shuttle.createdDate);
                         var serverData = new Date(response.CreatedDate);
                         if (serverData > currentData) { // update timetable
-                            console.log('[JaistMobile] Update New Shuttle Bus TimeTable', response.Stations);
+                            console.log('[JaistApp] Update New Shuttle Bus TimeTable', response.Stations);
                             this.props.fetchShuttleBus(response.Author, response.CreatedDate, response.Stations);
                             saveShuttleBus(response);
                         }
@@ -109,18 +111,39 @@ class Welcome extends Component {
                 }
                 this._navigateToHome();
             }).catch ((err) => {
-                console.log('[JaistMobile] _checkForUpdates', err);
+                console.log('[JaistApp] _checkForUpdates', err);
                 this._navigateToHome();
             });
 
         }).catch ((err) => {
-            console.log('[JaistMobile] _checkForUpdates', err);
+            console.log('[JaistApp] _checkForUpdates', err);
             this._navigateToHome();
         });
     }
 
     _navigateToHome() {
-        console.log('[JaistMobile] _navigateToHome');
+        console.log('[JaistApp] _navigateToHome');
+     
+        Navigation.startTabBasedApp({
+            tabs: [
+                {
+                    label: 'Hokutetsu',
+                    screen: 'ishikawaline',
+                    icon: station_ico,
+                    title: 'Ishikawa Line',
+                },
+                {
+                    label: 'Shuttle Bus',
+                    screen: 'shuttlebus',
+                    icon: bus_ico,
+                    title: 'Shuttle Bus',
+                }
+            ],
+            tabsStyle: tabsStyle,
+            animationType: 'fade',
+            title: 'Home',
+            appStyle: tabsStyle
+        });
     }
 }
 
