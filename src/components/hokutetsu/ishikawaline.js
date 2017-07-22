@@ -3,8 +3,8 @@
 // Jaist App
 
 import React, { Component } from 'react';
-import { View, Text, Picker, Modal } from 'react-native';
-import { Grid, Col, Row, CheckBox } from 'react-native-elements';
+import { Platform, View, Text, Picker, Modal, ActionSheetIOS } from 'react-native';
+import { Grid, Col, Row, CheckBox, Button } from 'react-native-elements';
 import { connect} from 'react-redux';
 
 import { fetchTimetable } from '../../redux/actions/timetable';
@@ -30,6 +30,10 @@ const stations = [
     { key: 'nomachi', label: 'Nomachi'},
 ];
 
+const options = ['Tsurugi', 'Hinomiko', 'Oyanagi', 'Inokuchi', 'Douhouji', 'Sodani', 
+                'Hibari', 'Otomaru (Sushiro)', 'Nuka-Joutakumae', 'Magae', 'Nonoichi-Koudaimae', 'Nonoichi (2nd Street, Book Off)',
+                'Oshino', 'Shinnishi-Kanazawa (to Kanazawa Station)', 'Nishi-Izumi', 'Nomachi', 'Cancel'];
+
 class IshikawaLine extends Component {
 
     constructor(props) {
@@ -39,6 +43,8 @@ class IshikawaLine extends Component {
         this._onDirectionChanged.bind(this);
         this._onCheckToNomachi.bind(this);
         this._onCheckToTsurugi.bind(this);
+        this._showStations.bind(this);
+        this._getStation.bind(this);
 
         this.state = {
             isWaiting: false,
@@ -55,6 +61,18 @@ class IshikawaLine extends Component {
     }
 
     render() {
+        var station = 
+            <Picker style={{ flex: 1 }} mode="dropdown" selectedValue={this.state.station} onValueChange={this._onStationChanged.bind(this)}>
+                {
+                    stations.map((station) => {
+                        return (<Picker.Item label={station.label} key={station.key} value={station.key} />);
+                    })
+                }
+            </Picker>;
+        if (Platform.OS === 'ios')
+            station = <Button style={{ flex: 1, marginTop: 3, marginLeft: 1 }} iconLeft icon={{name: 'search', color: 'gray'}} backgroundColor='#FFFF' color='black'
+                        borderRadius={1} title={this._getStation(this.state.station)} onPress={this._showStations.bind(this)} />;
+
         return (
             <View style={{ flex: 1, flexDirection: 'column' }}>
                 <Modal animationType={'fade'} transparent visible={this.state.isWaiting} onRequestClose={() => this.setState({visible: false})}>
@@ -70,19 +88,28 @@ class IshikawaLine extends Component {
                 </View>
                 <View style={{flexDirection: 'row', marginLeft: 5, marginRight: 5, height: 50 }}>  
                     <Text style={{ color: '#000000', alignSelf: 'center', width: 90 }}>Bus Station:</Text>
-                    <Picker style={{ flex: 1 }} mode="dropdown" selectedValue={this.state.station} onValueChange={this._onStationChanged.bind(this)}>
-                    {
-                        stations.map((station) => {
-                            return (<Picker.Item label={station.label} key={station.key} value={station.key} />);
-                        })
-                    }
-                    </Picker>
+                    {station}
                 </View>
                 <View style={{ flex: 1 }}>
                     <TimeTable />
                 </View>
             </View>
         );
+    }
+
+    /**
+     * Get stations name based on key
+     *
+     * @module Hokutetsu/IshikawaLine
+     * @ngdoc method
+     * @name $_getStation
+     */
+    _getStation(name) {
+        for (i = 0; i < stations.length; i++) { 
+            if (stations[i].key == name)
+                return stations[i].label;
+        }
+        return 'Unkown';
     }
 
     /**
@@ -177,6 +204,25 @@ class IshikawaLine extends Component {
     }
 
     /**
+     * Show dropdown to select station
+     *
+     * @module Hokutetsu/IshikawaLine
+     * @ngdoc method
+     * @name $_showStations
+     */
+    _showStations() {
+        ActionSheetIOS.showActionSheetWithOptions({
+        options: options,
+        cancelButtonIndex: options.length-1,
+        },
+        (index) => {
+            if (index == options.length - 1)
+                return;
+            this._onStationChanged(stations[index].key);
+        });
+    }
+
+    /**
      * Get timetable
      *
      * @module Hokutetsu/IshikawaLine
@@ -186,7 +232,7 @@ class IshikawaLine extends Component {
      * @param  {String} [direction] timetable to tsurugi or jaist
      */
     _getTimetable(station, direction) {
-        console.log('[ShuttleBus] _getTimetable', station);
+        console.log('[Hokutetsu] _getTimetable', station);
         this.setState({ isWaiting: true });
 
         for(var i = 0; i < this.props.stations.length; i++) {

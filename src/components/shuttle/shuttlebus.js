@@ -3,8 +3,8 @@
 // Jaist App
 
 import React, { Component } from 'react';
-import { View, Text, Picker, Modal } from 'react-native';
-import { Grid, Col, Row, CheckBox } from 'react-native-elements';
+import { View, Text, Picker, Modal, Platform, ActionSheetIOS } from 'react-native';
+import { Grid, Col, Row, CheckBox, Button } from 'react-native-elements';
 import { connect} from 'react-redux';
 
 import { fetchTsurugi } from '../../redux/actions/tsurugi';
@@ -21,6 +21,9 @@ const stations = [
     { key: 'tsurugihonmachi', label: 'Tsurugi-Honmachi (Lets)'},
     { key: 'tsurugi', label: 'Tsurugi'},
 ];
+
+const options = ['Jaist', 'Haiteku-Mae', 'Miyatake', 'Todashino', 'Iwamoto', 'Hon-Tsurugi (JP Bank)', 
+                'Tsurugi-Honmachi (Lets)', 'Tsurugi', 'Cancel'];
 
 class ShuttleBus extends Component {
 
@@ -46,6 +49,18 @@ class ShuttleBus extends Component {
     }
 
     render() {
+        var station = 
+                <Picker style={{ flex: 1 }} mode="dropdown" selectedValue={this.state.station} onValueChange={this._onStationChanged.bind(this)}>
+                {
+                    stations.map((station) => {
+                        return (<Picker.Item label={station.label} key={station.key} value={station.key} />);
+                    })
+                }
+                </Picker>
+        if (Platform.OS === 'ios')
+            station = <Button style={{ flex: 1, marginTop: 3, marginLeft: 1 }} iconLeft icon={{name: 'search', color: 'gray'}} backgroundColor='#FFFF' color='black'
+                        borderRadius={1} title={this._getStation(this.state.station)} onPress={this._showStations.bind(this)} />;
+
         return (
             <View style={{ flex: 1, flexDirection: 'column' }}>
                 <Modal animationType={'fade'} transparent visible={this.state.isWaiting} onRequestClose={() => this.setState({visible: false})}>
@@ -61,19 +76,47 @@ class ShuttleBus extends Component {
                 </View>
                 <View style={{flexDirection: 'row', marginLeft: 5, marginRight: 5, height: 50 }}>  
                     <Text style={{ color: '#000000', alignSelf: 'center', width: 90 }}>Bus Station:</Text>
-                    <Picker style={{ flex: 1 }} mode="dropdown" selectedValue={this.state.station} onValueChange={this._onStationChanged.bind(this)}>
-                    {
-                        stations.map((station) => {
-                            return (<Picker.Item label={station.label} key={station.key} value={station.key} />);
-                        })
-                    }
-                    </Picker>
+                    {station}
                 </View>
                 <View style={{ flex: 1 }}>
                     <TimeTable />
                 </View>
             </View>
         );
+    }
+
+    /**
+     * Get stations name based on key
+     *
+     * @module Hokutetsu/IshikawaLine
+     * @ngdoc method
+     * @name $_getStation
+     */
+    _getStation(name) {
+        for (i = 0; i < stations.length; i++) { 
+            if (stations[i].key == name)
+                return stations[i].label;
+        }
+        return 'Unkown';
+    }
+
+    /**
+     * Show dropdown to select station
+     *
+     * @module Hokutetsu/IshikawaLine
+     * @ngdoc method
+     * @name $_showStations
+     */
+    _showStations() {
+        ActionSheetIOS.showActionSheetWithOptions({
+        options: options,
+        cancelButtonIndex: options.length-1,
+        },
+        (index) => {
+            if (index == options.length - 1)
+                return;
+            this._onStationChanged(stations[index].key);
+        });
     }
 
     /**

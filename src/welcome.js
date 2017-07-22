@@ -25,6 +25,7 @@ const tabsStyle = {
 const station_ico = (Platform.OS === 'ios')? require('./resources/station.png') : require('./resources/station_android.png');
 const bus_ico = (Platform.OS === 'ios')? require('./resources/bus.png') : require('./resources/bus_android.png');
 
+
 class Welcome extends Component {
     static navigatorStyle = {
         navBarHidden: true, // make the nav bar hidden
@@ -72,53 +73,57 @@ class Welcome extends Component {
     }
 
     _checkForUpdates(forceUpdate) {
-        getIshikawaLineTimeTable().then((response) => {
-            console.log('[JaistApp] _checkForUpdates', response);
-            if (response != undefined) {
-                if (forceUpdate) {
-                    console.log('[JaistApp] Update New Ishikawa Lines TimeTable', response.Stations);
-                    this.props.fetchIshikawaLine(response.Author, response.CreatedDate, response.Stations);
-                    saveIshikawaLine(response);
-                }
-                else if (response.CreatedDate != undefined) {
-                    var currentData = new Date(this.props.ishikawaline.createdDate);
-                    var serverData = new Date(response.CreatedDate);
-                    if (serverData > currentData) { // update timetable
+        try {
+            getIshikawaLineTimeTable().then((response) => {
+                console.log('[JaistApp] _checkForUpdates', response);
+                if (response != undefined && response.Stations != undefined) {
+                    if (forceUpdate) {
                         console.log('[JaistApp] Update New Ishikawa Lines TimeTable', response.Stations);
                         this.props.fetchIshikawaLine(response.Author, response.CreatedDate, response.Stations);
                         saveIshikawaLine(response);
                     }
-                }
-            }
-
-            getShuttleBusTimeTable().then((response) => {
-                console.log('[JaistMobile] _checkForUpdates', response);
-                if (response != undefined) {
-                    if (forceUpdate) {
-                        console.log('[JaistMobile] Update New Shuttle Bus TimeTable', response.Stations);
-                        this.props.fetchShuttleBus(response.Author, response.CreatedDate, response.Stations);
-                        saveShuttleBus(response);
-                    }
                     else if (response.CreatedDate != undefined) {
-                        var currentData = new Date(this.props.shuttle.createdDate);
+                        var currentData = new Date(this.props.ishikawaline.createdDate);
                         var serverData = new Date(response.CreatedDate);
                         if (serverData > currentData) { // update timetable
+                            console.log('[JaistApp] Update New Ishikawa Lines TimeTable', response.Stations);
+                            this.props.fetchIshikawaLine(response.Author, response.CreatedDate, response.Stations);
+                            saveIshikawaLine(response);
+                        }
+                    }
+                }
+
+                getShuttleBusTimeTable().then((response) => {
+                    console.log('[JaistApp] _checkForUpdates', response);
+                    if (response != undefined) {
+                        if (forceUpdate) {
                             console.log('[JaistApp] Update New Shuttle Bus TimeTable', response.Stations);
                             this.props.fetchShuttleBus(response.Author, response.CreatedDate, response.Stations);
                             saveShuttleBus(response);
                         }
+                        else if (response.CreatedDate != undefined) {
+                            var currentData = new Date(this.props.shuttle.createdDate);
+                            var serverData = new Date(response.CreatedDate);
+                            if (serverData > currentData) { // update timetable
+                                console.log('[JaistApp] Update New Shuttle Bus TimeTable', response.Stations);
+                                this.props.fetchShuttleBus(response.Author, response.CreatedDate, response.Stations);
+                                saveShuttleBus(response);
+                            }
+                        }
                     }
-                }
-                this._navigateToHome();
-            }).catch ((err) => {
-                console.log('[JaistApp] _checkForUpdates', err);
-                this._navigateToHome();
-            });
+                    this._navigateToHome();
+                }).catch ((err) => {
+                    console.log('[JaistApp][Exception] _checkForUpdates', err);
+                    this._navigateToHome();
+                });
 
-        }).catch ((err) => {
-            console.log('[JaistApp] _checkForUpdates', err);
-            this._navigateToHome();
-        });
+            }).catch ((err) => {
+                console.log('[JaistApp][Exception] _checkForUpdates', err);
+                this._navigateToHome();
+            }); 
+        } catch (err) {
+            console.log('[JaistApp][Exception] _checkForUpdates', err)
+        }
     }
 
     _navigateToHome() {

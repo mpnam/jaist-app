@@ -2,7 +2,19 @@
 //
 // Jaist App
 
-var SITE = 'https://mpnam.github.io/shared/jaist-mobile/';
+import * as firebase from 'firebase';
+
+
+// Initialize Firebase
+const firebaseConfig = {
+  apiKey: "AIzaSyAdrk6613XtZ9p4VkQ34RDhKkYloGPlhIs",
+  authDomain: "jaistapp.firebaseapp.com",
+  databaseURL: "https://jaistapp.firebaseio.com",
+  storageBucket: "jaistapp.appspot.com"
+};
+
+const firebaseApp = firebase.initializeApp(firebaseConfig);
+var storageRef = firebase.storage(firebaseApp).refFromURL('gs://jaistapp.appspot.com/');
 
 /**
  * Get Timetable for Ishikawa Line of Hokutetsu Railroad
@@ -14,10 +26,14 @@ var SITE = 'https://mpnam.github.io/shared/jaist-mobile/';
  */
 function getIshikawaLineTimeTable() {
     console.log('[SERVICES]', 'getIshikawaLineTimeTable');
-    return fetch(SITE + 'hokutetsu-ishikawa.json').then((response) => response.json()).then((responseJson) => {
-        return responseJson;
+    return storageRef.child('hokutetsu-ishikawa.json').getDownloadURL().then(function(url) {
+        return fetch(url).then((response) => response.json()).then((responseJson) => {
+            return responseJson;
+        }).catch((error) => {
+            return error;
+        });
     }).catch((error) => {
-        console.log(error);
+        return error;
     });
 }
 
@@ -31,10 +47,14 @@ function getIshikawaLineTimeTable() {
  */
 function getShuttleBusTimeTable() {
     console.log('[SERVICES]', 'getShuttleBusTimeTable');
-    return fetch(SITE + 'shuttle-tsurugi.json').then((response) => response.json()).then((responseJson) => {
-        return responseJson;
+    return storageRef.child('shuttle-tsurugi.json').getDownloadURL().then(function(url) {
+        return fetch(url).then((response) => response.json()).then((responseJson) => {
+            return responseJson;
+        }).catch((error) => {
+            return error;
+        });
     }).catch((error) => {
-        console.log(error);
+        return error;
     });
 }
 
