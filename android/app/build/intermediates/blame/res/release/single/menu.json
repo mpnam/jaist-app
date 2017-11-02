@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "C:\\Users\\mpnam\\Work\\jaist-app\\android\\app\\build\\intermediates\\res\\merged\\release\\menu\\stub.xml",
+        "source": "C:\\Users\\mpnam\\Work\\jaist-app\\android\\app\\build\\intermediates\\exploded-aar\\jaistapp\\react-native-navigation\\unspecified\\res\\menu\\stub.xml"
+    },
+    {
+        "merged": "C:\\Users\\mpnam\\Work\\jaist-app\\android\\app\\build\\intermediates\\res\\merged\\release\\menu\\search_item.xml",
+        "source": "C:\\Users\\mpnam\\Work\\jaist-app\\android\\app\\build\\intermediates\\exploded-aar\\jaistapp\\react-native-navigation\\unspecified\\res\\menu\\search_item.xml"
+    }
+]

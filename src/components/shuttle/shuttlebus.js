@@ -13,7 +13,7 @@ import styles from './styles';
 
 const stations = [
     { key: 'jaist', label: 'Jaist'},
-    { key: 'haiketumae', label: 'Haiteku-Mae'},
+    { key: 'haitekumae', label: 'Haiteku-Mae'},
     { key: 'miyatake', label: 'Miyatake'},
     { key: 'todashino', label: 'Todashino'},
     { key: 'iwamoto', label: 'Iwamoto'},
@@ -22,8 +22,16 @@ const stations = [
     { key: 'tsurugi', label: 'Tsurugi'},
 ];
 
+const directions = [
+    { key: 'jaist', label: 'JAIST'},
+    { key: 'tsurugi', label: 'Tsurugi'}
+];
+
 const options = ['Jaist', 'Haiteku-Mae', 'Miyatake', 'Todashino', 'Iwamoto', 'Hon-Tsurugi (JP Bank)', 
                 'Tsurugi-Honmachi (Lets)', 'Tsurugi', 'Cancel'];
+
+const directionsOPT = ['JAIST', 'Tsurugi', 'Cancel'];
+
 
 class ShuttleBus extends Component {
 
@@ -32,15 +40,11 @@ class ShuttleBus extends Component {
 
         this._getTimetable.bind(this);
         this._onDirectionChanged.bind(this);
-        this._onCheckToJaist.bind(this);
-        this._onCheckToTsurugi.bind(this);
 
         this.state = {
             isWaiting: false,
             station: 'jaist',
-            direction: 'tsurugi',
-            tojaist: false,
-            totsurugi: true,
+            direction: 'tsurugi'
         };
     }
 
@@ -61,6 +65,18 @@ class ShuttleBus extends Component {
             station = <Button style={{ flex: 1, marginTop: 3, marginLeft: 1 }} iconLeft icon={{name: 'search', color: 'gray'}} backgroundColor='#FFFF' color='black'
                         borderRadius={1} title={this._getStation(this.state.station)} onPress={this._showStations.bind(this)} />;
 
+        var direction = 
+        <Picker style={{ flex: 1 }} mode="dropdown" selectedValue={this.state.direction} onValueChange={this._onDirectionChanged.bind(this)}>
+            {
+                directions.map((station) => {
+                    return (<Picker.Item label={station.label} key={station.key} value={station.key} />);
+                })
+            }
+        </Picker>;
+        if (Platform.OS === 'ios')
+        direction = <Button style={{ flex: 1, marginTop: 3, marginLeft: 1 }} iconLeft icon={{name: 'search', color: 'gray'}} backgroundColor='#FFFF' color='black'
+                    borderRadius={1} title={this._getStation(this.state.station, true)} onPress={this._showStations(true)} />;
+
         return (
             <View style={{ flex: 1, flexDirection: 'column' }}>
                 <Modal animationType={'fade'} transparent visible={this.state.isWaiting} onRequestClose={() => this.setState({visible: false})}>
@@ -71,8 +87,8 @@ class ShuttleBus extends Component {
                     </View>
                 </Modal>
                 <View style={{flexDirection: 'row', marginLeft: 5, marginRight: 5, height: 50 }}>  
-                    <CheckBox title='To Tsurugi' checked={this.state.totsurugi} onIconPress={this._onCheckToTsurugi.bind(this)} />
-                    <CheckBox title='To Jaist' checked={this.state.tojaist} onIconPress={this._onCheckToJaist.bind(this)} />
+                    <Text style={{ color: '#000000', alignSelf: 'center' }}>Your direction is to:</Text>
+                    {direction}
                 </View>
                 <View style={{flexDirection: 'row', marginLeft: 5, marginRight: 5, height: 50 }}>  
                     <Text style={{ color: '#000000', alignSelf: 'center', width: 90 }}>Bus Station:</Text>
@@ -88,14 +104,22 @@ class ShuttleBus extends Component {
     /**
      * Get stations name based on key
      *
-     * @module Hokutetsu/IshikawaLine
+     * @module Hokutetsu/Shuttle
      * @ngdoc method
      * @name $_getStation
      */
-    _getStation(name) {
-        for (i = 0; i < stations.length; i++) { 
-            if (stations[i].key == name)
-                return stations[i].label;
+    _getStation = (name, direction = false) => {
+        if (direction) {
+            for (i = 0; i < directions.length; i++) { 
+                if (directions[i].key == name)
+                    return directions[i].label;
+            }
+        } 
+        else {
+            for (i = 0; i < stations.length; i++) { 
+                if (stations[i].key == name)
+                    return stations[i].label;
+            }
         }
         return 'Unkown';
     }
@@ -103,109 +127,61 @@ class ShuttleBus extends Component {
     /**
      * Show dropdown to select station
      *
-     * @module Hokutetsu/IshikawaLine
+     * @module Hokutetsu/Shuttle
      * @ngdoc method
      * @name $_showStations
      */
-    _showStations() {
-        ActionSheetIOS.showActionSheetWithOptions({
-        options: options,
-        cancelButtonIndex: options.length-1,
-        },
-        (index) => {
-            if (index == options.length - 1)
-                return;
-            this._onStationChanged(stations[index].key);
-        });
-    }
-
-    /**
-     * Update weekdays/holidays option
-     *
-     * @module Shuttle/ShuttleBus
-     * @ngdoc method
-     * @name $_onCheckWeekdays
-     */
-    _onCheckToJaist() {
-        if (this.state.tojaist) {
-            this.setState({
-                tojaist: false,
-                totsurugi: true
+    _showStations = (direction = false) => {
+        if (direction) {
+            ActionSheetIOS.showActionSheetWithOptions({
+            options: directionsOPT,
+            cancelButtonIndex: directionsOPT.length-1,
+            },
+            (index) => {
+                if (index == directionsOPT.length - 1)
+                    return;
+                this._onDirectionChanged(directions[index].key);
             });
-            this._onDirectionChanged('tsurugi');
         } else {
-            this.setState({
-                tojaist: true,
-                totsurugi: false
+            ActionSheetIOS.showActionSheetWithOptions({
+            options: options,
+            cancelButtonIndex: options.length-1,
+            },
+            (index) => {
+                if (index == options.length - 1)
+                    return;
+                this._onStationChanged(stations[index].key);
             });
-            this._onDirectionChanged('jaist');
-        }
-    }
-
-    /**
-     * Update weekdays/holidays option
-     *
-     * @module Shuttle/ShuttleBus
-     * @ngdoc method
-     * @name $_onCheckHolidays
-     */
-    _onCheckToTsurugi() {
-        if (this.state.totsurugi) {
-            this.setState({
-                tojaist: true,
-                totsurugi: false
-            });
-            this._onDirectionChanged('jaist');
-        } else {
-            this.setState({
-                tojaist: false,
-                totsurugi: true
-            });
-            this._onDirectionChanged('tsurugi');
         }
     }
 
     /**
      * Update timetable since direction was changed
      *
-     * @module Shuttle/ShuttleBus
+     * @module Hokutetsu/Shuttle
      * @ngdoc method
      * @name $_onDirectionChanged
      * @param  {String} [value] directions name
      */
-    _onDirectionChanged(value: string) {
+    _onDirectionChanged(value) {
         this.setState({
             direction: value
         });
-
-        console.log("_onDirectionChanged", value);
         this._getTimetable(this.state.station, value);
     }
 
     /**
      * Update timetable since station was changed
      *
-     * @module Timetable/Station
+     * @module Hokutetsu/Shuttle
      * @ngdoc method
      * @name $_onStationChanged
      * @param  {String} [value] stations name
      */
     _onStationChanged(value) {
-        if (value == 'tsurugi')
-            this.setState({
-                station: value,
-                direction: 'jaist'
-            });
-        else if (value == 'jaist')
-            this.setState({
-                station: value,
-                direction: 'tsurugi'
-            });
-        else
-            this.setState({
-                station: value
-            });
-        console.log("_onStationChanged", value);
+        this.setState({
+            station: value
+        });
 
         this._getTimetable(value, this.state.direction);
     }
@@ -213,7 +189,7 @@ class ShuttleBus extends Component {
     /**
      * Get timetable
      *
-     * @module Timetable/Station
+     * @module Hokutetsu/Shuttle
      * @ngdoc method
      * @name $_getTimetable
      * @param  {String} [station] stations name
@@ -224,6 +200,7 @@ class ShuttleBus extends Component {
         this.setState({ isWaiting: true });
 
         for(var i = 0; i < this.props.stations.length; i++) {
+            console.log("check station name ", this.props.stations[i].Name);
             if (this.props.stations[i].Name == station) {
                 var weekdays = (direction == 'tsurugi')? this.props.stations[i].ToTsurugi.Weekdays : this.props.stations[i].ToJaist.Weekdays;
                 var holidays = (direction == 'tsurugi')? this.props.stations[i].ToTsurugi.Holidays : this.props.stations[i].ToJaist.Holidays;

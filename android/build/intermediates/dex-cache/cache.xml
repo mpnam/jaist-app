@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="C:\Users\mpnam\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\25.3.1\support-annotations-25.3.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="bf8841d29fa39e077730e7a91222c2ce269fa7c9">
+        <dex dex="C:\Users\mpnam\Work\jaist-app\android\app\build\intermediates\pre-dexed\release\support-annotations-25.3.1_58789fae176e004239b8d6419565a2f4f368b26a.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\mpnam\Work\jaist-app\android\app\build\intermediates\exploded-aar\com.facebook.react\react-native\0.44.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="af9665a44df26b4098e24c934c1109507845ef5e">
+        <dex dex="C:\Users\mpnam\Work\jaist-app\android\app\build\intermediates\pre-dexed\release\com.facebook.react-react-native-0.44.0_2cabc6bc8e17f3104646d86c23bcb4c417a7ea23.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\mpnam\Work\jaist-app\android\app\build\intermediates\exploded-aar\com.balysv.materialmenu\material-menu\1.5.4\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="1f6ff1728c297524e82b875ce2dfda946f4bca41">
+        <dex dex="C:\Users\mpnam\Work\jaist-app\android\app\build\intermediates\pre-dexed\release\com.balysv.materialmenu-material-menu-1.5.4_e3c88f2a4b7f5f5d5e1e1df3afdd45ab72194a6e.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\mpnam\Work\jaist-app\android\app\build\intermediates\exploded-aar\com.android.support\support-v4\25.3.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="C:\Users\mpnam\Work\jaist-app\android\app\build\intermediates\pre-dexed\release\com.android.support-support-v4-25.3.1_1cbb2dca06bb51684f23731731ce751d119722eb.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\mpnam\Work\jaist-app\android\app\build\intermediates\exploded-aar\com.android.support\design\25.3.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="38789e20ace9ab7dbd00554bd2673ab424478d3b">
+        <dex dex="C:\Users\mpnam\Work\jaist-app\android\app\build\intermediates\pre-dexed\release\com.android.support-design-25.3.1_b04772a77112fefaca23c0559b9a8603d04d1700.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\mpnam\Work\jaist-app\android\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\25.3.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="052f5f840f21174a3ecf6544130194e2652cbb73">
+        <dex dex="C:\Users\mpnam\Work\jaist-app\android\app\build\intermediates\pre-dexed\release\com.android.support-support-core-ui-25.3.1_7b6376a6e6d953539527afa6e8f7c7edd41df817.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\mpnam\Work\jaist-app\android\app\build\intermediates\exploded-aar\com.aurelhubert\ahbottomnavigation\2.0.6\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="c8ba41bea7f78f8bdf3a803b9d08eb3fff416706">
+        <dex dex="C:\Users\mpnam\Work\jaist-app\android\app\build\intermediates\pre-dexed\release\com.aurelhubert-ahbottomnavigation-2.0.6_5fbeb2059180206484c4f914ba6471b4298fbc45.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\mpnam\Work\jaist-app\android\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\25.3.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="6ef31f1555bb4cc513ec8d52711365a8b89f3600">
+        <dex dex="C:\Users\mpnam\Work\jaist-app\android\app\build\intermediates\pre-dexed\release\com.android.support-support-core-utils-25.3.1_79b04aba99057ebc2b89669d013047da03d59e2b.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\mpnam\Work\jaist-app\android\app\build\intermediates\exploded-aar\com.facebook.fresco\imagepipeline\1.0.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="d9c4402c3057225d80cbbbec52154e7a25b0ebdf">
+        <dex dex="C:\Users\mpnam\Work\jaist-app\android\app\build\intermediates\pre-dexed\release\com.facebook.fresco-imagepipeline-1.0.1_9d24b9ee73581c2f067a7157fe6e588add09df37.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\mpnam\.gradle\caches\modules-2\files-2.1\javax.inject\javax.inject\1\6975da39a7040257bd51d21a231b76c915872d38\javax.inject-1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="6975da39a7040257bd51d21a231b76c915872d38">
+        <dex dex="C:\Users\mpnam\Work\jaist-app\android\app\build\intermediates\pre-dexed\release\javax.inject-1_19a38c8192ac82a7bba414a88ac4e9f88f66bfb7.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\mpnam\Work\jaist-app\android\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\25.3.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="150252b33b00274cc868578ade018fda0d43a3eb">
+        <dex dex="C:\Users\mpnam\Work\jaist-app\android\app\build\intermediates\pre-dexed\release\com.android.support-appcompat-v7-25.3.1_56b254ea9c7f391f2ccb0073bcc6f907b594fb08.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\mpnam\Work\jaist-app\android\app\build\intermediates\exploded-aar\com.facebook.fresco\fresco\1.0.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="cf836a435a496eb22ff2aa69aa1e619462549f81">
+        <dex dex="C:\Users\mpnam\Work\jaist-app\android\app\build\intermediates\pre-dexed\release\com.facebook.fresco-fresco-1.0.1_c62b2e7be9a8e3fbddb89c272b6b7c645fe3d6bc.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\mpnam\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp3\okhttp-urlconnection\3.4.1\63994437f62bc861bc20c605d12962f7246116d1\okhttp-urlconnection-3.4.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="63994437f62bc861bc20c605d12962f7246116d1">
+        <dex dex="C:\Users\mpnam\Work\jaist-app\android\app\build\intermediates\pre-dexed\release\okhttp-urlconnection-3.4.1_567227621a1be4821c7f7afc07944e2084cf16cb.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\mpnam\Work\jaist-app\android\app\build\intermediates\exploded-aar\com.android.support\transition\25.3.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="d4cf6227dd6a2ceff0f7dcf0c324380b7abf2c28">
+        <dex dex="C:\Users\mpnam\Work\jaist-app\android\app\build\intermediates\pre-dexed\release\com.android.support-transition-25.3.1_42d9baee396d7314f9e9d69669d7e42d47611d5c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\mpnam\.gradle\caches\modules-2\files-2.1\com.facebook.fbui.textlayoutbuilder\staticlayout-proxy\1.0\f162442a19fff13995fbd51ba414d9ee05579080\staticlayout-proxy-1.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="f162442a19fff13995fbd51ba414d9ee05579080">
+        <dex dex="C:\Users\mpnam\Work\jaist-app\android\app\build\intermediates\pre-dexed\release\staticlayout-proxy-1.0_07b729fecd59b37dee4e480c616b3da972c8740a.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\mpnam\Work\jaist-app\android\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\25.3.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="efb8cb62d47d157c29d1521daac7eefd4cb881ee">
+        <dex dex="C:\Users\mpnam\Work\jaist-app\android\app\build\intermediates\pre-dexed\release\com.android.support-support-vector-drawable-25.3.1_e6328cde20c9cf7e3face0384827425759896600.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\mpnam\Work\jaist-app\android\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\25.3.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="47635644d0d5c103c1dd8360549eb9ba3225c7d3">
+        <dex dex="C:\Users\mpnam\Work\jaist-app\android\app\build\intermediates\pre-dexed\release\com.android.support-animated-vector-drawable-25.3.1_7c50c3506351c43d9016ea3a6acd5386418a2efb.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\mpnam\Work\jaist-app\android\app\build\intermediates\exploded-aar\com.android.support\support-fragment\25.3.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="4a26a1154d053ab11aaf4c3967c42a4d66390991">
+        <dex dex="C:\Users\mpnam\Work\jaist-app\android\app\build\intermediates\pre-dexed\release\com.android.support-support-fragment-25.3.1_67feaef1fd11bf9dbd7952b9610d9555544f4333.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\mpnam\Work\jaist-app\android\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\25.3.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="95519720620b553f63afc789beba9ad582807f7c">
+        <dex dex="C:\Users\mpnam\Work\jaist-app\android\app\build\intermediates\pre-dexed\release\com.android.support-recyclerview-v7-25.3.1_d6b26acac8640aca5f8d19672bb5757837b993bb.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\mpnam\Work\jaist-app\android\app\build\intermediates\exploded-aar\com.facebook.fresco\imagepipeline-base\1.0.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="050f688115ea65a0292d8483a6ffe6bcdab1e2ef">
+        <dex dex="C:\Users\mpnam\Work\jaist-app\android\app\build\intermediates\pre-dexed\release\com.facebook.fresco-imagepipeline-base-1.0.1_c435d6d2fdb798cb9cf2a7677e74e09492a21bdd.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\mpnam\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp3\okhttp\3.4.1\c7c4f9e35c2fd5900da24f9872e3971801f08ce0\okhttp-3.4.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="c7c4f9e35c2fd5900da24f9872e3971801f08ce0">
+        <dex dex="C:\Users\mpnam\Work\jaist-app\android\app\build\intermediates\pre-dexed\release\okhttp-3.4.1_ff8c8b5baecdf545893d3d42b11d7caaf1bc1c94.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\mpnam\Work\jaist-app\android\app\build\intermediates\exploded-aar\com.facebook.fresco\imagepipeline-okhttp3\1.0.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="ba9b39366b723ccff6359d1117332968e98a4aca">
+        <dex dex="C:\Users\mpnam\Work\jaist-app\android\app\build\intermediates\pre-dexed\release\com.facebook.fresco-imagepipeline-okhttp3-1.0.1_4df77214a75d8c413326d7a60bd76a67b198c80e.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\mpnam\.gradle\caches\modules-2\files-2.1\com.parse.bolts\bolts-tasks\1.4.0\d85884acf6810a3bbbecb587f239005cbc846dc4\bolts-tasks-1.4.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="d85884acf6810a3bbbecb587f239005cbc846dc4">
+        <dex dex="C:\Users\mpnam\Work\jaist-app\android\app\build\intermediates\pre-dexed\release\bolts-tasks-1.4.0_135b2ea9c9a3883da4c80d9538c6510be1371bac.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\mpnam\Work\jaist-app\android\app\build\intermediates\exploded-aar\com.facebook.fbui.textlayoutbuilder\textlayoutbuilder\1.0.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="f90b593491e4044903f0bbf68dc3fa2790b151b9">
+        <dex dex="C:\Users\mpnam\Work\jaist-app\android\app\build\intermediates\pre-dexed\release\com.facebook.fbui.textlayoutbuilder-textlayoutbuilder-1.0.0_d64f350cf03ddc1e63edb98bf63891403d1bad1d.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\mpnam\Work\jaist-app\android\app\build\intermediates\exploded-aar\jaistapp\react-native-vector-icons\unspecified\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="f2cf527de8d0bd35d72088fafea02395ba4a9eec">
+        <dex dex="C:\Users\mpnam\Work\jaist-app\android\app\build\intermediates\pre-dexed\release\jaistapp-react-native-vector-icons-unspecified_73dde8cc31352f7ee04c09bee7034452fdb940ea.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\mpnam\.gradle\caches\modules-2\files-2.1\com.google.code.findbugs\jsr305\3.0.0\5871fb60dc68d67da54a663c3fd636a10a532948\jsr305-3.0.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="5871fb60dc68d67da54a663c3fd636a10a532948">
+        <dex dex="C:\Users\mpnam\Work\jaist-app\android\app\build\intermediates\pre-dexed\release\jsr305-3.0.0_76cc1c6972f97d583c6ac28d0a1eb12dcb62d4f0.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\mpnam\Work\jaist-app\android\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\25.3.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="45f697922e6f072daa12f8a2995dc77ab03c11da">
+        <dex dex="C:\Users\mpnam\Work\jaist-app\android\app\build\intermediates\pre-dexed\release\com.android.support-support-media-compat-25.3.1_d1edba0fcafe5fc7a067f5a7c457dcda11465f76.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\mpnam\Work\jaist-app\android\app\build\intermediates\exploded-aar\com.balysv.materialmenu\material-menu-toolbar\1.5.4\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="55d7bf547c88cb7c8c7c5cdbf3b06dd66c9750f8">
+        <dex dex="C:\Users\mpnam\Work\jaist-app\android\app\build\intermediates\pre-dexed\release\com.balysv.materialmenu-material-menu-toolbar-1.5.4_a2dd84077a5537872525a93b3a7e8e69a29c25b3.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\mpnam\Work\jaist-app\android\app\build\intermediates\exploded-aar\com.facebook.react\react-native\0.44.0\jars\libs\infer-annotations-1.5.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="dcac634e137395f79693ec760f081a86eb2bd84e">
+        <dex dex="C:\Users\mpnam\Work\jaist-app\android\app\build\intermediates\pre-dexed\release\infer-annotations-1.5_d475b4c1f4ee06d80b21b5ccf341e85f8bf921c6.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\mpnam\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp3\okhttp-ws\3.4.1\8ace66ef7002d98f633377c9e67daeeb196d8c3b\okhttp-ws-3.4.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="8ace66ef7002d98f633377c9e67daeeb196d8c3b">
+        <dex dex="C:\Users\mpnam\Work\jaist-app\android\app\build\intermediates\pre-dexed\release\okhttp-ws-3.4.1_c4466aa6f1e7a9c9b73ba74a4b9234a0f2957da8.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\mpnam\Work\jaist-app\android\app\build\intermediates\exploded-aar\com.facebook.fresco\drawee\1.0.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="5a61f17cd72e20aa4323cbf5f909b7c609619275">
+        <dex dex="C:\Users\mpnam\Work\jaist-app\android\app\build\intermediates\pre-dexed\release\com.facebook.fresco-drawee-1.0.1_5529c13418d849bcfe6e96a740b2c11e78b59bfb.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\mpnam\Work\jaist-app\android\app\build\intermediates\exploded-aar\com.android.support\support-compat\25.3.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="da27a32db6af8954ee8061537c7d476fcb1df46f">
+        <dex dex="C:\Users\mpnam\Work\jaist-app\android\app\build\intermediates\pre-dexed\release\com.android.support-support-compat-25.3.1_c64bd178ecb3499476f28fe4490bd30d0995f5c6.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\mpnam\Work\jaist-app\android\app\build\intermediates\exploded-aar\jaistapp\react-native-navigation\unspecified\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="62984e17e8c8f2cc06d2b300dc13cafe754970a6">
+        <dex dex="C:\Users\mpnam\Work\jaist-app\android\app\build\intermediates\pre-dexed\release\jaistapp-react-native-navigation-unspecified_908ddb8a331f59df0b00ee0066b8566e0aff68fd.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\mpnam\Work\jaist-app\android\app\build\intermediates\exploded-aar\com.facebook.soloader\soloader\0.1.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="8f615bca00639150c9eb6175d4b5471193f70794">
+        <dex dex="C:\Users\mpnam\Work\jaist-app\android\app\build\intermediates\pre-dexed\release\com.facebook.soloader-soloader-0.1.0_99335d3416443e2c9cac38a9718fe2c952ed1711.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\mpnam\.gradle\caches\modules-2\files-2.1\com.squareup.okio\okio\1.9.0\f824591a0016efbaeddb8300bee54832a1398cfa\okio-1.9.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="f824591a0016efbaeddb8300bee54832a1398cfa">
+        <dex dex="C:\Users\mpnam\Work\jaist-app\android\app\build\intermediates\pre-dexed\release\okio-1.9.0_7f6d4569d56e0cd678ba018301c3c6edc6176d6e.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\mpnam\Work\jaist-app\android\app\build\intermediates\exploded-aar\com.facebook.fresco\fbcore\1.0.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="2668e49e4e31c7d451b76a36009b902bf44e0d70">
+        <dex dex="C:\Users\mpnam\Work\jaist-app\android\app\build\intermediates\pre-dexed\release\com.facebook.fresco-fbcore-1.0.1_80577836f36eb891ac9e58df7757aeeffbbe6b67.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\mpnam\.gradle\caches\modules-2\files-2.1\com.nineoldandroids\library\2.4.0\e9b63380f3a242dbdbf103a2355ad7e43bad17cb\library-2.4.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="e9b63380f3a242dbdbf103a2355ad7e43bad17cb">
+        <dex dex="C:\Users\mpnam\Work\jaist-app\android\app\build\intermediates\pre-dexed\release\library-2.4.0_9a50f9374d593e5a42c766fc986b22072b326f91.jar" />
+    </item>
+
+</items>

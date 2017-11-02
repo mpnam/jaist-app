@@ -4,15 +4,14 @@
 // Welcome screen
 
 import React, { Component } from 'react';
-import { Platform, StyleSheet, View, Image, AsyncStorage } from 'react-native';
+import { Platform, StyleSheet, View, Image, AsyncStorage, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { Navigation } from 'react-native-navigation';
 
 import { fetchIshikawaLine } from './redux/actions/ishikawaline.js';
 import { fetchShuttleBus } from './redux/actions/shuttle.js';
-import { getIshikawaLineTimeTable, getShuttleBusTimeTable } from './libs/services';
+import { getIshikawaLineTimeTable, getShuttleBusTimeTable, checkUpdate } from './libs/services';
 import { saveIshikawaLine, saveShuttleBus } from './libs/localstorage';
-
 
 const tabsStyle = {
     tabBarButtonColor: '#BCBCBC', 
@@ -35,6 +34,7 @@ class Welcome extends Component {
         super(props);
 
         this._checkForUpdates.bind(this);
+        this._update.bind(this);
         this._navigateToHome.bind(this);
     }
 
@@ -42,25 +42,25 @@ class Welcome extends Component {
         try {
             AsyncStorage.getItem('ishikawaline').then((value) => {
                 let json = JSON.parse(value);
-                console.log('[JaistApp] componentWillMount', json);
+                console.log('[JaistApp] componentWillMount ishikawaline', json);
                 if (json != null) {
                     this.props.fetchIshikawaLine(json.Author, json.CreatedDate, json.Stations);
                 } else
-                    return this._checkForUpdates(true);
+                    return this._checkForUpdates();
                 
                 AsyncStorage.getItem('shuttlebus').then((value) => {
                     let json = JSON.parse(value);
-                    console.log('[JaistApp] componentWillMount', json);
+                    console.log('[JaistApp] componentWillMount shuttlebus', json);
                     if (json != null) {
                         this.props.fetchShuttleBus(json.Author, json.CreatedDate, json.Stations);
-                        this._checkForUpdates(false);
+                        this._checkForUpdates(json.CreatedDate);
                     } else
-                        return this._checkForUpdates(true);
+                        return this._checkForUpdates();
                 });
             });
         } catch (err) {
             console.log('[JaistApp] componentWillMount', err)
-            this._checkForUpdates(true);
+            this._checkForUpdates();
         }
     }
 
@@ -72,44 +72,39 @@ class Welcome extends Component {
         );
     }
 
-    _checkForUpdates(forceUpdate) {
+    _checkForUpdates(currentCreatedDate = "") {
+        try {
+            if (currentCreatedDate == "")
+                this._update();
+            else {
+                checkUpdate(currentCreatedDate).then((res) => {
+                    if (res)
+                        this._update();
+                    else
+                        this._navigateToHome();
+                });
+            }
+        } catch (err) {
+            console.log('[JaistApp][Exception] _checkForUpdates', err)
+        }
+    }
+
+    _update() {
         try {
             getIshikawaLineTimeTable().then((response) => {
-                console.log('[JaistApp] _checkForUpdates', response);
+                console.log('[JaistApp] _checkForUpdates getIshikawaLineTimeTable', response);
                 if (response != undefined && response.Stations != undefined) {
-                    if (forceUpdate) {
-                        console.log('[JaistApp] Update New Ishikawa Lines TimeTable', response.Stations);
-                        this.props.fetchIshikawaLine(response.Author, response.CreatedDate, response.Stations);
-                        saveIshikawaLine(response);
-                    }
-                    else if (response.CreatedDate != undefined) {
-                        var currentData = new Date(this.props.ishikawaline.createdDate);
-                        var serverData = new Date(response.CreatedDate);
-                        if (serverData > currentData) { // update timetable
-                            console.log('[JaistApp] Update New Ishikawa Lines TimeTable', response.Stations);
-                            this.props.fetchIshikawaLine(response.Author, response.CreatedDate, response.Stations);
-                            saveIshikawaLine(response);
-                        }
-                    }
+                    console.log('[JaistApp] Update New Ishikawa Lines TimeTable', response.Stations);
+                    this.props.fetchIshikawaLine(response.Author, response.CreatedDate, response.Stations);
+                    saveIshikawaLine(response);
                 }
 
                 getShuttleBusTimeTable().then((response) => {
-                    console.log('[JaistApp] _checkForUpdates', response);
-                    if (response != undefined) {
-                        if (forceUpdate) {
-                            console.log('[JaistApp] Update New Shuttle Bus TimeTable', response.Stations);
-                            this.props.fetchShuttleBus(response.Author, response.CreatedDate, response.Stations);
-                            saveShuttleBus(response);
-                        }
-                        else if (response.CreatedDate != undefined) {
-                            var currentData = new Date(this.props.shuttle.createdDate);
-                            var serverData = new Date(response.CreatedDate);
-                            if (serverData > currentData) { // update timetable
-                                console.log('[JaistApp] Update New Shuttle Bus TimeTable', response.Stations);
-                                this.props.fetchShuttleBus(response.Author, response.CreatedDate, response.Stations);
-                                saveShuttleBus(response);
-                            }
-                        }
+                    console.log('[JaistApp] _checkForUpdates getShuttleBusTimeTable', response);
+                    if (response != undefined && response.Stations != undefined) {
+                        console.log('[JaistApp] Update New Shuttle Bus TimeTable', response.Stations);
+                        this.props.fetchShuttleBus(response.Author, response.CreatedDate, response.Stations);
+                        saveShuttleBus(response);
                     }
                     this._navigateToHome();
                 }).catch ((err) => {
@@ -135,13 +130,13 @@ class Welcome extends Component {
                     label: 'Hokutetsu',
                     screen: 'ishikawaline',
                     icon: station_ico,
-                    title: 'Ishikawa Line',
+                    title: 'Ishikawa Line (Tsurugi <-> Kanazawa)',
                 },
                 {
                     label: 'Shuttle Bus',
                     screen: 'shuttlebus',
                     icon: bus_ico,
-                    title: 'Shuttle Bus',
+                    title: 'Shuttle Bus (JAIST <-> Tsurugi)',
                 }
             ],
             tabsStyle: tabsStyle,

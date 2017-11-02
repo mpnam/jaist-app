@@ -4,7 +4,7 @@
 
 import React, { Component } from 'react';
 import { Platform, View, Text, Picker, Modal, ActionSheetIOS } from 'react-native';
-import { Grid, Col, Row, CheckBox, Button } from 'react-native-elements';
+import { Grid, Col, Row, Button } from 'react-native-elements';
 import { connect} from 'react-redux';
 
 import { fetchTimetable } from '../../redux/actions/timetable';
@@ -30,9 +30,17 @@ const stations = [
     { key: 'nomachi', label: 'Nomachi'},
 ];
 
+const directions = [
+    { key: 'nomachi', label: 'Nomachi (Kanazawa)'},
+    { key: 'tsurugi', label: 'Tsurugi (JAIST)'}
+];
+
 const options = ['Tsurugi', 'Hinomiko', 'Oyanagi', 'Inokuchi', 'Douhouji', 'Sodani', 
                 'Hibari', 'Otomaru (Sushiro)', 'Nuka-Joutakumae', 'Magae', 'Nonoichi-Koudaimae', 'Nonoichi (2nd Street, Book Off)',
                 'Oshino', 'Shinnishi-Kanazawa (to Kanazawa Station)', 'Nishi-Izumi', 'Nomachi', 'Cancel'];
+
+const directionsOPT = ['Nomachi', 'Tsurugi', "Cancel"];
+
 
 class IshikawaLine extends Component {
 
@@ -41,22 +49,15 @@ class IshikawaLine extends Component {
 
         this._getTimetable.bind(this);
         this._onDirectionChanged.bind(this);
-        this._onCheckToNomachi.bind(this);
-        this._onCheckToTsurugi.bind(this);
-        this._showStations.bind(this);
-        this._getStation.bind(this);
 
         this.state = {
             isWaiting: false,
             station: 'tsurugi',
-            direction: 'nomachi',
-            tonomachi: true,
-            totsurugi: false,
+            direction: 'nomachi'
         };
     }
 
     componentWillMount() {
-        console.log('DEUBG', this.props.stations);
         this._getTimetable(this.state.station, this.state.direction);
     }
 
@@ -73,6 +74,18 @@ class IshikawaLine extends Component {
             station = <Button style={{ flex: 1, marginTop: 3, marginLeft: 1 }} iconLeft icon={{name: 'search', color: 'gray'}} backgroundColor='#FFFF' color='black'
                         borderRadius={1} title={this._getStation(this.state.station)} onPress={this._showStations.bind(this)} />;
 
+        var direction = 
+            <Picker style={{ flex: 1 }} mode="dropdown" selectedValue={this.state.direction} onValueChange={this._onDirectionChanged.bind(this)}>
+                {
+                    directions.map((station) => {
+                        return (<Picker.Item label={station.label} key={station.key} value={station.key} />);
+                    })
+                }
+            </Picker>;
+        if (Platform.OS === 'ios')
+            direction = <Button style={{ flex: 1, marginTop: 3, marginLeft: 1 }} iconLeft icon={{name: 'search', color: 'gray'}} backgroundColor='#FFFF' color='black'
+                        borderRadius={1} title={this._getStation(this.state.station, true)} onPress={this._showStations(true)} />;
+
         return (
             <View style={{ flex: 1, flexDirection: 'column' }}>
                 <Modal animationType={'fade'} transparent visible={this.state.isWaiting} onRequestClose={() => this.setState({visible: false})}>
@@ -83,8 +96,8 @@ class IshikawaLine extends Component {
                     </View>
                 </Modal>
                 <View style={{flexDirection: 'row', marginLeft: 5, marginRight: 5, height: 50 }}>  
-                    <CheckBox title='To Nomachi' checked={this.state.tonomachi} onIconPress={this._onCheckToNomachi.bind(this)} />
-                    <CheckBox title='To Tsurugi' checked={this.state.totsurugi} onIconPress={this._onCheckToTsurugi.bind(this)} />
+                    <Text style={{ color: '#000000', alignSelf: 'center' }}>Your direction is to:</Text>
+                    {direction}
                 </View>
                 <View style={{flexDirection: 'row', marginLeft: 5, marginRight: 5, height: 50 }}>  
                     <Text style={{ color: '#000000', alignSelf: 'center', width: 90 }}>Bus Station:</Text>
@@ -104,58 +117,20 @@ class IshikawaLine extends Component {
      * @ngdoc method
      * @name $_getStation
      */
-    _getStation(name) {
-        for (i = 0; i < stations.length; i++) { 
-            if (stations[i].key == name)
-                return stations[i].label;
+    _getStation = (name, direction = false) => {
+        if (direction) {
+            for (i = 0; i < directions.length; i++) { 
+                if (directions[i].key == name)
+                    return directions[i].label;
+            }
+        } 
+        else {
+            for (i = 0; i < stations.length; i++) { 
+                if (stations[i].key == name)
+                    return stations[i].label;
+            }
         }
         return 'Unkown';
-    }
-
-    /**
-     * Update direction
-     *
-     * @module Hokutetsu/IshikawaLine
-     * @ngdoc method
-     * @name $_onCheckToNomachi
-     */
-    _onCheckToNomachi() {
-        if (this.state.tonomachi) {
-            this.setState({
-                tonomachi: false,
-                totsurugi: true
-            });
-            this._onDirectionChanged('tsurugi');
-        } else {
-            this.setState({
-                tonomachi: true,
-                totsurugi: false
-            });
-            this._onDirectionChanged('nomachi');
-        }
-    }
-
-    /**
-     * Update direction
-     *
-     * @module Hokutetsu/IshikawaLine
-     * @ngdoc method
-     * @name $_onCheckToTsurugi
-     */
-    _onCheckToTsurugi() {
-        if (this.state.totsurugi) {
-            this.setState({
-                tonomachi: true,
-                totsurugi: false
-            });
-            this._onDirectionChanged('nomachi');
-        } else {
-            this.setState({
-                tonomachi: false,
-                totsurugi: true
-            });
-            this._onDirectionChanged('tsurugi');
-        }
     }
 
     /**
@@ -166,12 +141,10 @@ class IshikawaLine extends Component {
      * @name $_onDirectionChanged
      * @param  {String} [value] directions name
      */
-    _onDirectionChanged(value: string) {
+    _onDirectionChanged(value) {
         this.setState({
             direction: value
         });
-
-        console.log("_onDirectionChanged", value);
         this._getTimetable(this.state.station, value);
     }
 
@@ -184,21 +157,9 @@ class IshikawaLine extends Component {
      * @param  {String} [value] stations name
      */
     _onStationChanged(value) {
-        if (value == 'nomachi')
-            this.setState({
-                station: value,
-                direction: 'tsurugi'
-            });
-        else if (value == 'tsurugi')
-            this.setState({
-                station: value,
-                direction: 'nomachi'
-            });
-        else
-            this.setState({
-                station: value
-            });
-        console.log("_onStationChanged", value);
+        this.setState({
+            station: value
+        });
 
         this._getTimetable(value, this.state.direction);
     }
@@ -210,16 +171,28 @@ class IshikawaLine extends Component {
      * @ngdoc method
      * @name $_showStations
      */
-    _showStations() {
-        ActionSheetIOS.showActionSheetWithOptions({
-        options: options,
-        cancelButtonIndex: options.length-1,
-        },
-        (index) => {
-            if (index == options.length - 1)
-                return;
-            this._onStationChanged(stations[index].key);
-        });
+    _showStations = (direction = false) => {
+        if (direction) {
+            ActionSheetIOS.showActionSheetWithOptions({
+            options: directionsOPT,
+            cancelButtonIndex: directionsOPT.length-1,
+            },
+            (index) => {
+                if (index == directionsOPT.length - 1)
+                    return;
+                this._onDirectionChanged(directions[index].key);
+            });
+        } else {
+            ActionSheetIOS.showActionSheetWithOptions({
+            options: options,
+            cancelButtonIndex: options.length-1,
+            },
+            (index) => {
+                if (index == options.length - 1)
+                    return;
+                this._onStationChanged(stations[index].key);
+            });
+        }
     }
 
     /**

@@ -14,7 +14,6 @@ const firebaseConfig = {
 };
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
-var storageRef = firebase.storage(firebaseApp).refFromURL('gs://jaistapp.appspot.com/');
 
 /**
  * Get Timetable for Ishikawa Line of Hokutetsu Railroad
@@ -25,8 +24,8 @@ var storageRef = firebase.storage(firebaseApp).refFromURL('gs://jaistapp.appspot
  * @return {Object} 
  */
 function getIshikawaLineTimeTable() {
-    console.log('[SERVICES]', 'getIshikawaLineTimeTable');
-    return storageRef.child('hokutetsu-ishikawa.json').getDownloadURL().then(function(url) {
+    var ishikawaline = firebase.storage(firebaseApp).refFromURL('gs://jaistapp.appspot.com/hokutetsu-ishikawa.json');
+    return ishikawaline.getDownloadURL().then(function(url) {
         return fetch(url).then((response) => response.json()).then((responseJson) => {
             return responseJson;
         }).catch((error) => {
@@ -46,8 +45,8 @@ function getIshikawaLineTimeTable() {
  * @return {Object} 
  */
 function getShuttleBusTimeTable() {
-    console.log('[SERVICES]', 'getShuttleBusTimeTable');
-    return storageRef.child('shuttle-tsurugi.json').getDownloadURL().then(function(url) {
+    var shuttleBus = firebase.storage(firebaseApp).refFromURL('gs://jaistapp.appspot.com/shuttle-tsurugi.json');
+    return shuttleBus.getDownloadURL().then(function(url) {
         return fetch(url).then((response) => response.json()).then((responseJson) => {
             return responseJson;
         }).catch((error) => {
@@ -58,4 +57,13 @@ function getShuttleBusTimeTable() {
     });
 }
 
-export { getIshikawaLineTimeTable, getShuttleBusTimeTable }
+function checkUpdate(currentCreatedDate) {
+    return firebaseApp.database().ref("CreatedDate").once('value').then(function(snapshot) {
+        console.log('teteteteetee', snapshot.val());
+        return (currentCreatedDate != snapshot.val());
+    }).catch((error) => {
+        return false;
+    });
+}
+
+export { getIshikawaLineTimeTable, getShuttleBusTimeTable, checkUpdate }
