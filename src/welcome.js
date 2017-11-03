@@ -4,7 +4,7 @@
 // Welcome screen
 
 import React, { Component } from 'react';
-import { Platform, StyleSheet, View, Image, AsyncStorage, Text } from 'react-native';
+import { Platform, StyleSheet, View, Image, AsyncStorage, Text, NetInfo } from 'react-native';
 import { connect } from 'react-redux';
 import { Navigation } from 'react-native-navigation';
 
@@ -77,15 +77,23 @@ class Welcome extends Component {
             if (currentCreatedDate == "")
                 this._update();
             else {
-                checkUpdate(currentCreatedDate).then((res) => {
-                    if (res)
-                        this._update();
-                    else
-                        this._navigateToHome();
+                NetInfo.isConnected.fetch().then(isConnected => {
+                    console.log("Check internet connection ", isConnected);
+                    
+                    if (isConnected)
+                        checkUpdate(currentCreatedDate).then((res) => {
+                            if (res)
+                                this._update();
+                            else
+                                this._navigateToHome();
+                        });
+                        else
+                    this._navigateToHome();
                 });
             }
         } catch (err) {
-            console.log('[JaistApp][Exception] _checkForUpdates', err)
+            console.log('[JaistApp][Exception] _checkForUpdates', err);
+            this._navigateToHome();
         }
     }
 
@@ -117,7 +125,8 @@ class Welcome extends Component {
                 this._navigateToHome();
             }); 
         } catch (err) {
-            console.log('[JaistApp][Exception] _checkForUpdates', err)
+            console.log('[JaistApp][Exception] _checkForUpdates', err);
+            this._navigateToHome();
         }
     }
 

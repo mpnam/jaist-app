@@ -264,21 +264,21 @@
     </item>
     <item
         is-multidex="false"
-        jar="C:\Users\mpnam\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp3\okhttp-ws\3.4.1\8ace66ef7002d98f633377c9e67daeeb196d8c3b\okhttp-ws-3.4.1.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.1"
-        sha1="8ace66ef7002d98f633377c9e67daeeb196d8c3b">
-        <dex dex="C:\Users\mpnam\Work\jaist-app\android\app\build\intermediates\pre-dexed\release\okhttp-ws-3.4.1_c4466aa6f1e7a9c9b73ba74a4b9234a0f2957da8.jar" />
-    </item>
-    <item
-        is-multidex="false"
         jar="C:\Users\mpnam\Work\jaist-app\android\app\build\intermediates\exploded-aar\com.facebook.fresco\drawee\1.0.1\jars\classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.1"
         sha1="5a61f17cd72e20aa4323cbf5f909b7c609619275">
         <dex dex="C:\Users\mpnam\Work\jaist-app\android\app\build\intermediates\pre-dexed\release\com.facebook.fresco-drawee-1.0.1_5529c13418d849bcfe6e96a740b2c11e78b59bfb.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\mpnam\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp3\okhttp-ws\3.4.1\8ace66ef7002d98f633377c9e67daeeb196d8c3b\okhttp-ws-3.4.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="8ace66ef7002d98f633377c9e67daeeb196d8c3b">
+        <dex dex="C:\Users\mpnam\Work\jaist-app\android\app\build\intermediates\pre-dexed\release\okhttp-ws-3.4.1_c4466aa6f1e7a9c9b73ba74a4b9234a0f2957da8.jar" />
     </item>
     <item
         is-multidex="false"
