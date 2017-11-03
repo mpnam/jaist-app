@@ -72,7 +72,7 @@ class IshikawaLine extends Component {
             </Picker>;
         if (Platform.OS === 'ios')
             station = <Button style={{ flex: 1, marginTop: 3, marginLeft: 1 }} iconLeft icon={{name: 'search', color: 'gray'}} backgroundColor='#FFFF' color='black'
-                        borderRadius={1} title={this._getStation(this.state.station)} onPress={this._showStations.bind(this)} />;
+                        borderRadius={1} title={this._getStation(this.state.station)} onPress={() => this._showStations(false)} />;
 
         var direction = 
             <Picker style={{ flex: 1 }} mode="dropdown" selectedValue={this.state.direction} onValueChange={this._onDirectionChanged.bind(this)}>
@@ -84,7 +84,7 @@ class IshikawaLine extends Component {
             </Picker>;
         if (Platform.OS === 'ios')
             direction = <Button style={{ flex: 1, marginTop: 3, marginLeft: 1 }} iconLeft icon={{name: 'search', color: 'gray'}} backgroundColor='#FFFF' color='black'
-                        borderRadius={1} title={this._getStation(this.state.station, true)} onPress={this._showStations(true)} />;
+                        borderRadius={1} title={this._getStation(this.state.direction, true)} onPress={() => this._showStations(true)} />;
 
         return (
             <View style={{ flex: 1, flexDirection: 'column' }}>
@@ -142,6 +142,7 @@ class IshikawaLine extends Component {
      * @param  {String} [value] directions name
      */
     _onDirectionChanged(value) {
+        console.log("testsetsts", value);
         this.setState({
             direction: value
         });
